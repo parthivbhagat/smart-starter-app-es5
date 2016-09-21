@@ -1,6 +1,7 @@
 (function(window){
   window.extractData = function() {
-    
+    var ret = $.Deferred(); 
+	
     function onError() {
       console.log('Loading error', arguments);
       ret.reject();
@@ -53,26 +54,26 @@
           p.lname = lname;
           p.age = parseInt(calculateAge(dob));
 
-          if(typeof height[0] !== 'undefined') {
-            p.obv.height = height[0].valueQuantity.value + ' ' + height[0].valueQuantity.unit;
+          if(typeof height[0] != 'undefined') {
+            p.height = height[0].valueQuantity.value + ' ' + height[0].valueQuantity.unit;
           }
           
-          if(typeof systolicbp[0] !== 'undefined') {
-            p.obv.systolicbp = systolicbp[0].valueQuantity.value + 
+          if(typeof systolicbp[0] != 'undefined') {
+            p.systolicbp = systolicbp[0].valueQuantity.value + 
                                   ' ' + systolicbp[0].valueQuantity.unit;
           }
 
-          if(typeof diastolicbp[0] !== 'undefined') {
-            p.obv.diastolicbp = diastolicbp[0].valueQuantity.value + 
+          if(typeof diastolicbp[0] != 'undefined') {
+            p.diastolicbp = diastolicbp[0].valueQuantity.value + 
                                   ' ' + diastolicbp[0].valueQuantity.unit;
           }
           
-          if(typeof hdl[0] !== 'undefined') {
-            p.obv.hdl = hdl[0].valueQuantity.value + ' ' + hdl[0].valueQuantity.unit;
+          if(typeof hdl[0] != 'undefined') {
+            p.hdl = hdl[0].valueQuantity.value + ' ' + hdl[0].valueQuantity.unit;
           }
 
-          if(typeof ldl[0] !== 'undefined') {
-            p.obv.ldl = ldl[0].valueQuantity.value + ' ' + ldl[0].valueQuantity.unit;
+          if(typeof ldl[0] != 'undefined') {
+            p.ldl = ldl[0].valueQuantity.value + ' ' + ldl[0].valueQuantity.unit;
           }
           ret.resolve(p);
         });
@@ -125,7 +126,7 @@
     
   }
 
-  function drawVisualization(p) { 
+  window.drawVisualization = function(p) { 
     $('#holder').show();
     $('#loading').hide();
     $('#fname').html(p.fname);
@@ -133,11 +134,11 @@
     $('#gender').html(p.gender);
     $('#birthday').html(p.birthday);  
     $('#age').html(p.age);
-    $('#height').html(p.obv.height);
-    $('#systolicbp').html(p.obv.systolicbp);
-    $('#diastolicbp').html(p.obv.diastolicbp);
-    $('#ldl').html(p.obv.ldl);
-    $('#hdl').html(p.obv.hdl);
+    $('#height').html(p.height);
+    $('#systolicbp').html(p.systolicbp);
+    $('#diastolicbp').html(p.diastolicbp);
+    $('#ldl').html(p.ldl);
+    $('#hdl').html(p.hdl);
   }
 
 })(window);
